@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Survey</title>
+</head>
+<body>
+    <h1>Edit Survey</h1>
+
+    <form th:object="${survey}" th:action="@{/surveys/update/{id}(id=${survey.surveyID})}" method="post">
+        <input type="hidden" th:field="*{surveyID}" />
+        Title: <input type="text" th:field="*{title}" />
+        Description: <input type="text" th:field="*{description}" />
+        Category: <input type="text" th:field="*{category}" />
+        Status: <input type="text" th:field="*{status}" />
+        <input type="submit" value="Update" />
+    </form>
+</body>
+</html>

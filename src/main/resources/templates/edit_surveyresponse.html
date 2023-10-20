@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        /* Your inline CSS styles here */
+    </style>
+</head>
+<body>
+    <h2>Edit Survey Response</h2>
+    <form th:action="@{/surveyresponses/edit/{id}(id=${response.surveyResponseID})}" method="post" th:object="${response}">
+        <input type="text" th:field="*{userID}" placeholder="User ID"/>
+        <input type="text" th:field="*{surveyID}" placeholder="Survey ID"/>
+        <input type="text" th:field="*{surveyQuestionID}" placeholder="Survey Question ID"/>
+        <input type="text" th:field="*{response}" placeholder="Response"/>
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

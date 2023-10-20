@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz Participations List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Quiz Participations List</h1>
+  <!-- ... (previous code) ... -->
+<form action="/quizparticipation/create" method="post">
+    <input type="text" th:field="${newParticipation.userID}" placeholder="User ID" />
+    <input type="text" th:field="${newParticipation.quizID}" placeholder="Quiz ID" />
+    <input type="text" th:field="${newParticipation.startTime}" placeholder="Start Time" />
+    <input type="text" th:field="${newParticipation.endTime}" placeholder="End Time" />
+    <input type="text" th:field="${newParticipation.score}" placeholder="Score" />
+    <!-- Add more form fields as needed for your QuizParticipation entity -->
+    <button type="submit">Create Participation</button>
+</form>
+<!-- ... (previous code) ... -->
+
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Quiz ID</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Score</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="participation : ${participations}">
+            <td th:text="${participation.participationID}">ID</td>
+            <td th:text="${participation.userID}">User ID</td>
+            <td th:text="${participation.quizID}">Quiz ID</td>
+            <td th:text="${participation.startTime}">Start Time</td>
+            <td th:text="${participation.endTime}">End Time</td>
+            <td th:text="${participation.score}">Score</td>
+            <td>
+                <a th:href="@{/quizparticipation/edit/{id}(id=${participation.participationID})}">Edit</a>
+                <a th:href="@{/quizparticipation/delete/{id}(id=${participation.participationID})}" style="color: red;">Delete</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

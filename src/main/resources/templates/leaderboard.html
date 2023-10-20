@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Leaderboard</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Leaderboard</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Quiz ID</th>
+                <th>Score</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="entry : ${entries}">
+                <td th:text="${entry.leaderboardEntryID}">ID</td>
+                <td th:text="${entry.userID}">User ID</td>
+                <td th:text="${entry.quizID}">Quiz ID</td>
+                <td th:text="${entry.score}">Score</td>
+                <td>
+                    <a th:href="@{/leaderboard/edit/{id}(id=${entry.leaderboardEntryID})}">Edit</a>
+                    <a th:href="@{/leaderboard/delete/{id}(id=${entry.leaderboardEntryID})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Create New Entry</h2>
+    <form th:object="${newEntry}" th:action="@{/leaderboard/entry}" method="post">
+        <input type="hidden" th:field="*{leaderboardEntryID}" />
+        User ID: <input type="text" th:field="*{userID}" />
+        Quiz ID: <input type="text" th:field="*{quizID}" />
+        Score: <input type="text" th:field="*{score}" />
+        <input type="submit" value="Create" />
+    </form>
+</body>
+</html>

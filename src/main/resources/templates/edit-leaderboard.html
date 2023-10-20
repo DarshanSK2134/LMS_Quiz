@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Leaderboard Entry</title>
+    <style>
+        form {
+            width: 80%;
+            margin: 20px auto;
+        }
+        input[type="text"] {
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Leaderboard Entry</h1>
+
+    <form th:object="${entry}" th:action="@{'/leaderboard/update/' + ${entry.leaderboardEntryID}}" method="post">
+        <input type="hidden" th:field="*{leaderboardEntryID}" />
+        User ID: <input type="text" th:field="*{userID}" />
+        Quiz ID: <input type="text" th:field="*{quizID}" />
+        Score: <input type="text" th:field="*{score}" />
+        <input type="submit" value="Save" />
+    </form>
+
+    <a th:href="@{/leaderboard/lists}">Back to Leaderboard</a>
+</body>
+</html>

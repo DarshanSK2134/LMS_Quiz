@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        /* Your inline CSS styles here */
+    </style>
+</head>
+<body>
+    <h2>Survey Responses</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Survey ID</th>
+            <th>Survey Question ID</th>
+            <th>Response</th>
+            <th>Actions</th>
+        </tr>
+        <!-- Iterate over your survey responses retrieved from the controller -->
+        <tr th:each="response : ${responses}">
+            <td th:text="${response.surveyResponseID}"></td>
+            <td th:text="${response.userID}"></td>
+            <td th:text="${response.surveyID}"></td>
+            <td th:text="${response.surveyQuestionID}"></td>
+            <td th:text="${response.response}"></td>
+            <td>
+                <a th:href="@{'/surveyresponses/edit/' + ${response.surveyResponseID}}">Edit</a> |
+                <a th:href="@{'/surveyresponses/delete/' + ${response.surveyResponseID}}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

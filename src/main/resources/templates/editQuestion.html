@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Question</title>
+</head>
+<body>
+    <h1>Edit Question</h1>
+
+    <form action="/quizquestions/edit/{id}" method="post" th:object="${question}">
+        <table>
+            <tr>
+                <th>ID:</th>
+                <td><input type="text" th:field="*{questionID}" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <th>Question Text:</th>
+                <td><input type="text" th:field="*{questionText}" /></td>
+                <!-- Add more rows for other properties -->
+            </tr>
+        </table>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <a th:href="@{/quizquestions/list}">Back to List</a>
+</body>
+</html>

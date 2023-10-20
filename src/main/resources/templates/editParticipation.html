@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Participation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input[type="text"], input[type="datetime-local"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Participation</h1>
+        <form action="/quizparticipation/edit/{id}" method="post">
+            <input type="hidden" th:field="${participation.participationID}" />
+            
+            <div class="form-group">
+                <label for="userID">User ID:</label>
+                <input type="text" id="userID" th:field="${participation.userID}" />
+            </div>
+            
+            <div class="form-group">
+                <label for="quizID">Quiz ID:</label>
+                <input type="text" id="quizID" th:field="${participation.quizID}" />
+            </div>
+              
+            <div class="form-group">
+                <label for="startTime">Start Time:</label>
+                <input type="datetime-local" id="startTime" th:field="${participation.startTime}" />
+            </div>
+            
+            <div class="form-group">
+                <label for="endTime">End Time:</label>
+                <input type="datetime-local" id="endTime" th:field="${participation.endTime}" />
+            </div>
+            
+            <div class="form-group">
+                <label for="score">Score:</label>
+                <input type="text" id="score" th:field="${participation.score}" />
+            </div>
+            
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

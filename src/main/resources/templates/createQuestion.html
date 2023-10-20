@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Question</title>
+</head>
+<body>
+    <h1>Create Question</h1>
+
+    <form action="/quizquestions/create" method="post" th:object="${newQuestion}">
+        <table>
+            <tr>
+                <th>Question Text:</th>
+                <td><input type="text" th:field="*{questionText}" /></td>
+                <!-- Add more rows for other properties -->
+            </tr>
+        </table>
+
+        <button type="submit">Create</button>
+    </form>
+
+    <a th:href="@{/quizquestions/list}">Back to List</a>
+</body>
+</html>

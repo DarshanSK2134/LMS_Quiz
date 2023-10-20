@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Progress List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #FFF;
+        }
+
+        form {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">User Progress List</h1>
+
+    <form action="/userprogress/create" method="post">
+        <label for="userID">User ID:</label>
+        <input type="text" id="userID" name="userID" />
+        <br>
+        <label for="quizID">Quiz ID:</label>
+        <input type="text" id="quizID" name="quizID" />
+        <br>
+        <label for="completed">Completed:</label>
+        <input type="checkbox" id="completed" name="completed" />
+        <br>
+        <label for="completionDate">Completion Date:</label>
+        <input type="text" id="completionDate" name="completionDate" />
+        <br>
+        <button type="submit">Create User Progress</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Quiz ID</th>
+            <th>Completed</th>
+            <th>Completion Date</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="userProgress : ${userProgressList}">
+            <td th:text="${userProgress.userProgressID}">ID</td>
+            <td th:text="${userProgress.userID}">User ID</td>
+            <td th:text="${userProgress.quizID}">Quiz ID</td>
+            <td>
+                <input type="checkbox" th:checked="${userProgress.completed}" disabled="disabled"/>
+            </td>
+            <td th:text="${userProgress.completionDate}">Completion Date</td>
+            <td>
+                <a th:href="@{'/userprogress/edit/' + ${userProgress.userProgressID}}">Edit</a>
+                <a th:href="@{'/userprogress/delete/' + ${userProgress.userProgressID}}" style="color: red;">Delete</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz List</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Quiz List</h1>
+    
+    <form action="/api/quizzes/enterQuiz" method="post">
+        <input type="text" th:field="${newQuiz.title}" placeholder="Title" />
+        <input type="text" th:field="${newQuiz.description}" placeholder="Description" />
+        <!-- Add more form fields as needed for your Quiz entity -->
+
+        <button type="submit">Create Quiz</button>
+    </form>
+
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <th style="background-color: #007BFF; color: #FFF; padding: 10px;">ID</th>
+            <th style="background-color: #007BFF; color: #FFF; padding: 10px;">Title</th>
+            <th style="background-color: #007BFF; color: #FFF; padding: 10px;">Description</th>
+            <th style="background-color: #007BFF; color: #FFF; padding: 10px;">Actions</th>
+        </tr>
+        <tr th:each="quiz : ${quizzes}">
+            <td style="border: 1px solid #ddd; padding: 10px;" th:text="${quiz.quizID}">ID</td>
+            <td style="border: 1px solid #ddd; padding: 10px;" th:text="${quiz.title}">Title</td>
+            <td style="border: 1px solid #ddd; padding: 10px;" th:text="${quiz.description}">Description</td>
+           <td style="border: 1px solid #ddd; padding: 10px;">
+    <a th:href="@{/quizzes/edit/{id}(id=${quiz.quizID})}">Edit</a>
+    <span style="margin-right: 10px;"></span> <!-- Add a margin -->
+    <a th:href="@{/quizzes/delete/{id}(id=${quiz.quizID})}" style="color: red;">Delete</a>
+</td>
+
+        </tr>
+    </table>
+</body>
+</html>

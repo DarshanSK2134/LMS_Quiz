@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Question List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #FFF;
+        }
+
+        form {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Question List</h1>
+
+    <form action="/quizquestions/create" method="post">
+        <label for="questionText">Question Text:</label>
+        <input type="text" id="questionText" name="questionText" />
+        <br>
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" />
+        <br>
+        <label for="options">Options (comma-separated):</label>
+        <input type="text" id="options" name="options" />
+        <br>
+        <label for="correctAnswer">Correct Answer:</label>
+        <input type="text" id="correctAnswer" name="correctAnswer" />
+        <br>
+        <label for="difficultyLevel">Difficulty Level:</label>
+        <input type="text" id="difficultyLevel" name="difficultyLevel" />
+        <br>
+        <button type="submit">Create Question</button>
+    </form>
+    
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Question Text</th>
+            <th>Type</th>
+            <th>Options</th>
+            <th>Correct Answer</th>
+            <th>Difficulty Level</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="question : ${questions}">
+            <td th:text="${question.questionID}">ID</td>
+            <td th:text="${question.questionText}">Question Text</td>
+            <td th:text="${question.type}">Type</td>
+            <td>
+                <ul>
+                    <li th:each="option : ${question.options}" th:text="${option}"></li>
+                </ul>
+            </td>
+            <td th:text="${question.correctAnswer}">Correct Answer</td>
+            <td th:text="${question.difficultyLevel}">Difficulty Level</td>
+            <td>
+                <a th:href="@{'/quizquestions/edit/' + ${question.questionID}}">Edit</a>
+                <a th:href="@{'/quizquestions/delete/' + ${question.questionID}}" style="color: red;">Delete</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

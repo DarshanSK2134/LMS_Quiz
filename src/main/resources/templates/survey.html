@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Survey Management</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            width: 80%;
+            margin: 20px auto;
+        }
+        input[type="text"] {
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Survey Management</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="survey : ${surveys}">
+                <td th:text="${survey.surveyID}">ID</td>
+                <td th:text="${survey.title}">Title</td>
+                <td th:text="${survey.description}">Description</td>
+                <td th:text="${survey.category}">Category</td>
+                <td th:text="${survey.status}">Status</td>
+                <td>
+                    <a th:href="@{/surveys/edit/{id}(id=${survey.surveyID})}">Edit</a>
+
+                    <a th:href="@{/surveys/delete/{id}(id=${survey.surveyID})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Create/Update Survey</h2>
+    <form th:object="${newSurvey}" th:action="@{/surveys/create}" method="post">
+        <input type="hidden" th:field="*{surveyID}" />
+        Title: <input type="text" th:field="*{title}" />
+        Description: <input type="text" th:field="*{description}" />
+        Category: <input type="text" th:field="*{category}" />
+        Status: <input type="text" th:field="*{status}" />
+        <input type="submit" value="Save" />
+    </form>
+</body>
+</html>

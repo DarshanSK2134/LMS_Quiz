@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 20px;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        form {
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Survey Questions</h1>
+
+    <!-- Create Form -->
+    <form th:object="${newQuestion}" th:action="@{/surveyquestions/create}" method="post">
+        <label>Question Text:</label>
+        <input type="text" th:field="*{questionText}" />
+        <label>Type:</label>
+        <input type="text" th:field="*{type}" />
+        <button type="submit">Create</button>
+    </form>
+
+    <!-- Survey Questions List -->
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Question Text</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="question : ${surveyQuestions}">
+            <td th:text="${question.surveyQuestionID}"></td>
+            <td th:text="${question.questionText}"></td>
+            <td th:text="${question.type}"></td>
+            <td>
+                <a th:href="@{/surveyquestions/edit/{id}(id=${question.surveyQuestionID})}">Edit</a>
+                <a th:href="@{/surveyquestions/delete/{id}(id=${question.surveyQuestionID})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Edit Form -->
+    <form th:object="${newQuestion}" method="post" th:action="@{/update/{id}(id=${newQuestion.surveyQuestionID})}">
+        <label>Updated Question Text:</label>
+        <input type="text" th:field="*{questionText}" />
+        <!-- Add other form fields for editing here -->
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

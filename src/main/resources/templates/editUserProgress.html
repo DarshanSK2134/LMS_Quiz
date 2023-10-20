@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User Progress</title>
+    <!-- Add your CSS styles here or link an external CSS file -->
+    <style>
+        /* Inline CSS styles go here */
+    </style>
+</head>
+
+<body>
+    <h1>Edit User Progress</h1>
+
+    <!-- Form for editing user progress -->
+    <form method="post" th:action="@{/userprogress/edit/{id}(id=${userProgress.userProgressID})}">
+        <input type="hidden" th:field="*{userProgressID}" />
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" th:field="*{userID}" />
+        <br/>
+        <label for="quizId">Quiz ID:</label>
+        <input type="text" id="quizId" th:field="*{quizID}" />
+        <br/>
+        <label for="completed">Completed:</label>
+        <input type="checkbox" id="completed" th:field="*{completed}" />
+        <br/>
+        <label for="completionDate">Completion Date:</label>
+        <input type="text" id="completionDate" th:field="*{completionDate}" />
+        <br/>
+        <input type="submit" value="Save" />
+    </form>
+
+    <a th:href="@{/userprogress/list}">Back to User Progress List</a>
+</body>
+
+</html>
